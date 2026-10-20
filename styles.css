@@ -72,10 +72,34 @@ strong { color: var(--cream); }
 }
 .hero p { color: var(--muted); font-size: 18.5px; margin: 10px auto 0; max-width: 520px; }
 .hero .pill { margin: 22px 0 8px; }
+.hero .soon { margin: 22px auto 14px; font-size: 13px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+.hero .button { margin-bottom: 12px; }
+
+/* Waitlist sign-up */
+.signup { padding: 36px 0 8px; }
+.signup .wrap > * { max-width: 560px; }
+.signup h2 { margin-top: 0; }
+.signup form { display: grid; gap: 14px; margin: 18px 0 10px; padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.signup input[type="email"] {
+  width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--charcoal);
+  color: var(--cream); font: 16px var(--body);
+}
+.signup input[type="email"]:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: transparent; }
+.signup fieldset { border: 0; margin: 0; padding: 0; display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
+.signup legend { float: left; margin-right: 6px; color: var(--muted); font-size: 15px; }
+.signup fieldset label { display: inline-flex; gap: 8px; align-items: center; cursor: pointer; }
+.signup input[type="radio"] { accent-color: var(--gold); width: 18px; height: 18px; }
+.signup .button { border: 0; cursor: pointer; font: 600 16px var(--body); justify-self: start; }
+.signup .button:disabled { opacity: 0.6; cursor: default; }
+.signup .trap { position: absolute; left: -9999px; width: 1px; height: 1px; }
+.form-message { margin: 0; min-height: 1.4em; font-size: 15px; }
+.form-message.ok { color: var(--gold); }
+.form-message.bad { color: #f0a07a; }
+.fine { color: var(--muted); font-size: 14px; }
 
 /* Buttons and pills */
 .pill { display: inline-block; padding: 10px 20px; border-radius: 999px; border: 1px solid var(--gold); color: var(--gold); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; font-size: 13px; text-decoration: none; }
-.button { display: inline-block; padding: 12px 22px; border-radius: 999px; background: var(--amber); color: var(--cream); font-weight: 600; text-decoration: none; }
+.button { display: inline-block; font-family: var(--body); padding: 12px 22px; border-radius: 999px; background: var(--amber); color: var(--cream); font-weight: 600; text-decoration: none; }
 
 /* Cards */
 .app-card { display: flex; gap: 18px; align-items: center; padding: 16px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); text-decoration: none; color: inherit; transition: border-color 0.15s; }

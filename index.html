@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@400;500;600&display=swap">
 <meta name="theme-color" content="#0d1212">
-<link rel="stylesheet" href="/styles.css?v=2">
+<link rel="stylesheet" href="/styles.css?v=3">
 </head>
 <body>
 <header class="site-header">
@@ -30,7 +30,30 @@
     <img class="logo" src="/images/bottle-chase-logo.jpg" width="590" height="604"
       alt="Bottle Chase logo: a whiskey bottle on a gold compass, with the words Bottle Chase, Find what you&rsquo;re chasing">
     <p>Allocated bourbon and whiskey near you, reported by hunters who just saw it on the shelf.</p>
-    <span class="pill">Coming soon for iPhone &amp; Android</span>
+    <p class="soon">Coming soon for iPhone &amp; Android</p>
+    <a class="button" href="#notify">Get notified at launch</a>
+  </div>
+</section>
+<section class="signup" id="notify">
+  <div class="wrap">
+    <h2>Be first to know</h2>
+    <p>Leave your email and we&rsquo;ll tell you the day Bottle Chase launches. No spam.</p>
+    <form id="waitlist" novalidate>
+      <label class="sr-only" for="wl-email">Email</label>
+      <input id="wl-email" name="email" type="email" inputmode="email" autocomplete="email" required
+        placeholder="you@example.com" maxlength="254">
+      <fieldset>
+        <legend>Your phone</legend>
+        <label><input type="radio" name="platform" value="iphone" checked> iPhone</label>
+        <label><input type="radio" name="platform" value="android"> Android</label>
+      </fieldset>
+      <!-- Hidden from people; bots that fill every field get ignored. -->
+      <input class="trap" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="button" type="submit">Notify me</button>
+      <p class="form-message" role="status" aria-live="polite"></p>
+    </form>
+    <p class="fine">We only use your email to tell you about Bottle Chase. Ask us any time to remove it. See the
+    <a href="/privacy/#waitlist">privacy policy</a>.</p>
   </div>
 </section>
 <main>
@@ -70,5 +93,42 @@
     <a href="support/">Support</a>
   </div>
 </footer>
+<script>
+// The waitlist form calls join_waitlist() in Supabase (migration 038) with the public anon key, which can only add
+// to the list, never read it.
+(() => {
+  const URL = 'https://nnxsqtufczipbkkhcrpa.supabase.co/rest/v1/rpc/join_waitlist';
+  const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ueHNxdHVmY3ppcGJra2hjcnBhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNDA4NTMsImV4cCI6MjEwNTkxNjg1M30.gvL8P78iEY7BcGAz74Lzvd6B7VyXikWatCA58mOfHkA';
+  const form = document.getElementById('waitlist');
+  const msg = form.querySelector('.form-message');
+  const say = (text, ok) => { msg.textContent = text; msg.className = 'form-message ' + (ok ? 'ok' : 'bad'); };
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = form.email.value.trim();
+    if (form.website.value) return say("Thanks! You're on the list.", true);
+    if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)) return say('Please enter a valid email address.', false);
+    const button = form.querySelector('button');
+    button.disabled = true;
+    say('Adding you…', true);
+    try {
+      const res = await fetch(URL, {
+        method: 'POST',
+        headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_email: email, p_platform: form.platform.value, p_source: location.hostname || 'bottlechase.app' }),
+      });
+      const body = await res.json().catch(() => null);
+      // Only the database's own friendly messages are shown; anything else gets a plain one.
+      const known = body && /valid email|Too many sign-ups/.test(body.message || '');
+      if (!res.ok) throw new Error(known ? body.message + '.' : "We couldn't add you right now.");
+      say(body === 'already' ? "You're already on the list. We'll be in touch!" : "Thanks! You're on the list.", true);
+      form.reset();
+    } catch (err) {
+      say(err.message + ' Please try again, or email contact@rarefindgroup.com.', false);
+    } finally {
+      button.disabled = false;
+    }
+  });
+})();
+</script>
 </body>
 </html>
