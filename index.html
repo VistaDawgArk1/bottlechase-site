@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bottle Chase: find what you&rsquo;re chasing</title>
-<meta name="description" content="Bottle Chase helps bourbon hunters find allocated bottles in stores near them, reported by other hunters.">
+<title>BottleProof: find what you&rsquo;re chasing</title>
+<meta name="description" content="BottleProof helps bourbon hunters find allocated bottles in stores near them, reported by other hunters.">
 <link rel="icon" href="/images/favicon.png">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,7 @@
 <body>
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="/">Bottle Chase</a>
+    <a class="brand" href="/">BottleProof</a>
     <nav>
       <a href="/" aria-current="page">Home</a>
       <a href="/support/">Support</a>
@@ -26,9 +26,9 @@
 </header>
 <section class="hero">
   <div class="wrap">
-    <h1 class="sr-only">Bottle Chase: find what you&rsquo;re chasing</h1>
-    <img class="logo" src="/images/bottle-chase-logo.jpg" width="590" height="604"
-      alt="Bottle Chase logo: a whiskey bottle on a gold compass, with the words Bottle Chase, Find what you&rsquo;re chasing">
+    <h1 class="sr-only">BottleProof: find what you&rsquo;re chasing</h1>
+    <img class="logo" src="/images/bottleproof-logo.jpg" width="702" height="564"
+      alt="BottleProof logo: a whiskey bottle on a gold compass, with the words BottleProof, Find what you&rsquo;re chasing">
     <p>Allocated bourbon and whiskey near you, reported by hunters who just saw it on the shelf.</p>
     <p class="soon">Coming soon for iPhone &amp; Android</p>
     <a class="button" href="#notify">Get notified at launch</a>
@@ -37,7 +37,7 @@
 <section class="signup" id="notify">
   <div class="wrap">
     <h2>Be first to know</h2>
-    <p>Leave your email and we&rsquo;ll tell you the day Bottle Chase launches. No spam.</p>
+    <p>Leave your email and we&rsquo;ll tell you the day BottleProof launches. No spam.</p>
     <form id="waitlist" novalidate>
       <label class="sr-only" for="wl-email">Email</label>
       <input id="wl-email" name="email" type="email" inputmode="email" autocomplete="email" required
@@ -52,7 +52,7 @@
       <button class="button" type="submit">Notify me</button>
       <p class="form-message" role="status" aria-live="polite"></p>
     </form>
-    <p class="fine">We only use your email to tell you about Bottle Chase. Ask us any time to remove it. See the
+    <p class="fine">We only use your email to tell you about BottleProof. Ask us any time to remove it. See the
     <a href="/privacy/#waitlist">privacy policy</a>.</p>
   </div>
 </section>
@@ -77,11 +77,11 @@
     featured are always labeled &ldquo;Sponsored.&rdquo; Your exact location stays on your phone. Read the
     <a href="privacy/">privacy policy</a>.</p>
 
-    <p class="note">Bottle Chase is for adults 21 and over. Please drink responsibly, and respect each store&rsquo;s
+    <p class="note">BottleProof is for adults 21 and over. Please drink responsibly, and respect each store&rsquo;s
     rules and staff.</p>
 
     <h2>Questions?</h2>
-    <p>See <a href="support/">Bottle Chase support</a> or email
+    <p>See <a href="support/">BottleProof support</a> or email
     <a href="mailto:contact@rarefindgroup.com">contact@rarefindgroup.com</a>.</p>
   </div>
 </main>
@@ -91,6 +91,9 @@
     <a href="privacy/">Privacy</a>
     <a href="terms/">Terms</a>
     <a href="support/">Support</a>
+    <a href="https://www.instagram.com/bottleproofapp/" rel="me">Instagram</a>
+    <a href="https://www.tiktok.com/@bottleproofapp" rel="me">TikTok</a>
+    <a href="https://x.com/bottleproofapp" rel="me">X</a>
   </div>
 </footer>
 <script>
@@ -114,7 +117,7 @@
       const res = await fetch(URL, {
         method: 'POST',
         headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ p_email: email, p_platform: form.platform.value, p_source: location.hostname || 'bottlechase.app' }),
+        body: JSON.stringify({ p_email: email, p_platform: form.platform.value, p_source: location.hostname || 'bottleproof.app' }),
       });
       const body = await res.json().catch(() => null);
       // Only the database's own friendly messages are shown; anything else gets a plain one.
